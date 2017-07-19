@@ -46,7 +46,7 @@ class JournalController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $selectAuthors->load(Yii::$app->request->post()) && $model->save()) {
             $journalAuthor = new JournalAuthor();
-		    $journalAuthor->A($selectAuthors,$model);
+		    $journalAuthor->saveJA($selectAuthors,$model);
           
             $image = new Image();
             $image->journal_id = $model->id;
@@ -75,7 +75,7 @@ class JournalController extends Controller
         
         if ($model->load(Yii::$app->request->post()) && $selectAuthors->load(Yii::$app->request->post()) && $model->save()) {
             $journalAuthor = new JournalAuthor();
-            $journalAuthor->A($selectAuthors, $model);
+            $journalAuthor->saveJA($selectAuthors, $model);
             
             $uploadForm->imageFile = UploadedFile::getInstance($uploadForm, 'imageFile');
             if($uploadForm->imageFile)
