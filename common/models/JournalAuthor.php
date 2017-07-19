@@ -41,7 +41,7 @@ class JournalAuthor extends ActiveRecord
         return $this->hasOne(Journal::className(), ['id' => 'journal_id']);
     }
     
-    public function A($selectAuthors, $model){
+    public function saveJA($selectAuthors, $model){
         
         $i=0;
         $journalAuthor = $this->findModel($model->id);
@@ -61,11 +61,11 @@ class JournalAuthor extends ActiveRecord
              $i++;
          } 
         
-        $this->DeleteJA($journalAuthor, count($selectAuthors));
+        $this->deleteJA($journalAuthor, count($selectAuthors));
             
     }
     
-    private function DeleteJA($journalAuthor, $start){
+    private function deleteJA($journalAuthor, $start){
         for($i=$start; $i<count($journalAuthor); $i++)
             $journalAuthor[$i]->delete();
     }
