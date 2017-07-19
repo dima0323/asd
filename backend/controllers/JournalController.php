@@ -73,7 +73,7 @@ class JournalController extends Controller
         $selectAuthors = new SelectAuthors();
 		$authors = Author::find()->all();    
         
-        if ($model->load(Yii::$app->request->post()) && $uploadForm->load(Yii::$app->request->post()) && $selectAuthors->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $selectAuthors->load(Yii::$app->request->post()) && $model->save()) {
             $journalAuthor = new JournalAuthor();
             $journalAuthor->A($selectAuthors, $model);
             
