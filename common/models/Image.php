@@ -24,8 +24,8 @@ class Image extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'journal_id' => 'Journal ID',
+            'id' => '№',
+            'journal_id' => 'Номер журнала',
         ];
     }
 
@@ -49,10 +49,8 @@ class Image extends ActiveRecord
         return Yii::getAlias('@frontendWebroot/images/' . $this->getHash() . '.jpg');
     }
 
-    public function afterDelete($model)
+    public function afterDelete()
     {
-        $this->id = $model->images[0]->id;
-        $this->journal_id = $model->id;
         unlink($this->getPath());
         parent::afterDelete();
     }

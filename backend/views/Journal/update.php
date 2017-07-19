@@ -2,11 +2,10 @@
 
 use yii\helpers\Html;
 
-
-$this->title = 'Update Journal: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Journals', 'url' => ['index']];
+$this->title = 'Редактирование Журнала: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Журналы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="journal-update">
 

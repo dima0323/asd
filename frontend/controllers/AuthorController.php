@@ -11,24 +11,14 @@ use common\models\Author;
 
 class AuthorController extends Controller
 {
-    public function beforeAction($action)
-    {
-        if (parent::beforeAction($action)) {
-            Url::remember();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function actionIndex($id = null)
     {
         $authors = Author::find();
         $authorsDataProvider = new ActiveDataProvider([
             'query' => $authors,
-            /*'sort'=>array(
+            'sort'=>array(
                     'defaultOrder'=>['surname' => SORT_ASC],
-            ),*/
+            ),
             'pagination' => [
                 'pageSize' => 5,
             ],

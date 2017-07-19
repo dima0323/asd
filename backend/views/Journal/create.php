@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Create Journal';
-$this->params['breadcrumbs'][] = ['label' => 'Journals', 'url' => ['index']];
+$this->title = 'Добавить Журнал';
+$this->params['breadcrumbs'][] = ['label' => 'Журналы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="journal-create">

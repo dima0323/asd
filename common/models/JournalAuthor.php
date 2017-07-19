@@ -25,9 +25,9 @@ class JournalAuthor extends ActiveRecord
     function attributeLabels()
     {
         return [
-            'id' => 'Id',
-            'author_id' => 'Author Id',
-            'journal_id' => 'Journal Id',
+            'id' => '№',
+            'author_id' => '№автора',
+            'journal_id' => '№журнала',
         ];
     }
 
@@ -41,13 +41,42 @@ class JournalAuthor extends ActiveRecord
         return $this->hasOne(Journal::className(), ['id' => 'journal_id']);
     }
     
-    public function saveA(SelectAuthors $selectAuthors)
+    public function A($selectAuthors, $model){
+        
+        $i=0;
+        $journalAuthor = $this->findModel($model->id);
+        $count = count($journalAuthor);
+        foreach ($selectAuthors->authors as $author) {
+             if($count>=$i+1){
+                $journalAuthor[$i]->author_id = $author;	
+                $journalAuthor[$i]->save();
+             }
+             else
+             {
+                $journalAuthor = new JournalAuthor();
+                $journalAuthor->author_id = $author;
+                $journalAuthor->journal_id =  $model->id;	
+                $journalAuthor->save();
+             }
+             $i++;
+         } 
+        
+        $this->DeleteJA($journalAuthor, count($selectAuthors));
+            
+    }
+    
+    private function DeleteJA($journalAuthor, $start){
+        for($i=$start; $i<count($journalAuthor); $i++)
+            $journalAuthor[$i]->delete();
+    }
+    
+    
+    private function findModel($id)
     {
-        foreach ($selectAuthors->$authors as $author) {
-				$journalAuthor = new JournalAuthor();
-				$journalAuthor->author_id = $author;
-				$journalAuthor->journal_id =  $model->id;	
-				$journalAuthor->save();
-			}
+        if (($model = $this::find()->where(['journal_id' => $id])->all()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('Не существует');
+        }
     }
 }

@@ -7,10 +7,9 @@ use yii\helpers\Url;
 <div class="row col-md-12 well">
 <div class="col-md-12">
     <div class="img">
-      <?php
-            $images = $model->images;
-            if (isset($images[0])) {
-                echo Html::img($images[0]->getUrl(), ['width' => '100%']);
+      <?
+            if (isset($model->images)) {
+                echo Html::img($model->images->getUrl(), ['width' => '100%']);
             }
             ?>
     </div>       

@@ -17,7 +17,7 @@ class Journal extends ActiveRecord
         return [
             [['title', 'date', 'description'], 'required'],
             [['date'], 'safe'],
-            [['title'], 'string', 'max' => 64],
+            [['title'], 'string', 'min' => 3],
             [['description'], 'string', 'max' => 512],
         ];
     }
@@ -25,22 +25,22 @@ class Journal extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'Id',
-            'title' => 'Title',
-            'description' => 'Description',
-            'date' => 'Date',
+            'id' => '№',
+            'title' => 'Название',
+            'description' => 'Описание',
+            'date' => 'Дата выпуска',
         ];
     }
 
     public function getImages()
     {
-        return $this->hasMany(Image::className(), ['journal_id' => 'id']);
+        return $this->hasOne(Image::className(), ['journal_id' => 'id']);
     }
 
-    /*public function getJournalAuthors()
+    public function getJournalAuthors()
     {
         return $this->hasMany(JournalAuthor::className(), ['journal_id' => 'id']);
-    }*/
+    }
     
     public function getAuthors()
     {

@@ -16,14 +16,14 @@ class Author extends \yii\db\ActiveRecord
     {
         return [
             [['surname', 'name'], 'required'],
-            [['surname', 'name'], 'string', 'max' => 32],
+            [['surname', 'name'], 'string', 'min' => 3],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'id' => 'Id',
+            'id' => '№',
             'surname' => 'Фамилия',
             'name' => 'Имя',
         ];

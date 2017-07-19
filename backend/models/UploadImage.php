@@ -10,15 +10,10 @@ class UploadImage extends Model{
 
     public $imageFile;
 
-    /**
-     * @return array the validation rules.
-     */
-   
-    
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file',  'extensions' => 'png, jpg'],
         ];
     }
     

@@ -7,10 +7,9 @@ use yii\helpers\Html;
     <div class="col-xs-3">
         <div class="row">
             <div class="img">
-              <?php
-                    $images = $model->images;
-                    if (isset($images[0])) {
-                        echo Html::img($images[0]->getUrl(), ['width' => '200px']);
+              <?
+                    if (isset($model->images)) {
+                        echo Html::img($model->images->getUrl(), ['width' => '200px']);
                     }
                     ?>
             </div>

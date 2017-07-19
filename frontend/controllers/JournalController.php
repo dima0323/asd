@@ -11,16 +11,6 @@ use common\models\Author;
 
 class JournalController extends Controller
 {
-    public function beforeAction($action)
-    {
-        if (parent::beforeAction($action)) {
-            Url::remember();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function actionIndex($id = null)
     {
         $journals = Journal::find();

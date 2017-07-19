@@ -42,18 +42,11 @@ class JournalController extends Controller
 		$uploadForm = new UploadImage();
         $model = new Journal();
         $selectAuthors = new SelectAuthors();
-        
 		$authors = Author::find()->all();
         
         if ($model->load(Yii::$app->request->post()) && $selectAuthors->load(Yii::$app->request->post()) && $model->save()) {
-		
-			foreach ($selectAuthors->authors as $author) {
-				$journalAuthor = new JournalAuthor();
-				$journalAuthor->author_id = $author;
-				$journalAuthor->journal_id =  $model->id;	
-                $journalAuthor->save();  
-			}
-            
+            $journalAuthor = new JournalAuthor();
+		    $journalAuthor->A($selectAuthors,$model);
           
             $image = new Image();
             $image->journal_id = $model->id;
@@ -80,15 +73,13 @@ class JournalController extends Controller
         $selectAuthors = new SelectAuthors();
 		$authors = Author::find()->all();    
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $uploadForm->load(Yii::$app->request->post()) && $selectAuthors->load(Yii::$app->request->post()) && $model->save()) {
+            $journalAuthor = new JournalAuthor();
+            $journalAuthor->A($selectAuthors, $model);
             
-            if($uploadForm->load(Yii::$app->request->post())){
-                $image = new Image();
-                $image->journal_id = $model->id;
-                $image->id = $model->images[0]->id;
-                $uploadForm->imageFile = UploadedFile::getInstance($uploadForm, 'imageFile');
-                $uploadForm->upload($image);
-            }
+            $uploadForm->imageFile = UploadedFile::getInstance($uploadForm, 'imageFile');
+            if($uploadForm->imageFile)
+                $uploadForm->upload($model->images);
             
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -103,8 +94,7 @@ class JournalController extends Controller
 
     public function actionDelete($id)
     {    
-        $image = new Image();
-        $image->afterDelete($this->findModel($id));
+        $this->findModel($id)->images->delete();
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
@@ -114,20 +104,7 @@ class JournalController extends Controller
         if (($model = Journal::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Не существует');
         }
-    }
-    
-    public function actionYourActionAdd()
-    { 
-        $model = new Author;
-        $model->save(false);
-        return $this->actionCreate();
-    }
-
-    public function actionYourActionRemove($id)
-    {
-        Author::findOne($id)->delete();
-        return $this->actionCreate();
     }
 }

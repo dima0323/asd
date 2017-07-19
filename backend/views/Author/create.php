@@ -3,7 +3,8 @@
 use yii\helpers\Html;
 
 $this->title = 'Добавить автора';
-
+$this->params['breadcrumbs'][] = ['label' => 'Авторы', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="author-create">
 

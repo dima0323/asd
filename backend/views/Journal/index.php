@@ -3,19 +3,14 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\JournalSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Journals';
+$this->title = 'Журналы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="journal-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Journal', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить Журнал', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
 <?php Pjax::begin(); ?>    
@@ -24,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
     
-            'id',
             'title',
             'description',
             'date',
@@ -40,4 +34,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); ?>
+</div>
